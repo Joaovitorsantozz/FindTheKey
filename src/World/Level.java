@@ -1,6 +1,7 @@
 package World;
 
 import Entity.ID;
+import Entity.Key;
 import GameObject.GameObject;
 import Main.Game;
 
@@ -40,33 +41,15 @@ public class Level extends World {
 						}
 					}
 				}
+				if(pa==0xFFFFD800)Game.handler.add(new Key(xx*32,yy*32, ID.Key));
+				if(pa==0xFFFFFFFF){
+					Game.handler.add(new Tile(xx*32,yy*32,ID.Block,TileType.Stone));
+					if(pixel[xx+((yy-1)*getWidth())]!=0xFFFFFFFF){
+						Game.handler.add(new Tile(xx*32,yy*32-32,ID.Block,TileType.DownFloor));
+					}
+				}
 			}
 		}
 
 	}
-
-	@Override
-	public void BitMap(int xx,int yy) {
-			if(yy == getHeight() - 1 || xx == getWidth() -1 || xx == 0 || yy == 0) {
-				Game.handler.add(new Tile(xx*32,yy*32,ID.Block,TileType.Stone));
-			}
-			if(yy == getHeight() - 2 || xx == getWidth() -2 || xx == 1 || yy == 1) {
-				Game.handler.add(new Tile(xx*32,yy*32,ID.Block,TileType.Stone));
-			}
-			//Circle the map with the tiles//
-			if(yy>2&&yy<getHeight()-2) {
-				if(xx==2)
-				Game.handler.add(new Tile(xx * 32, yy * 32, ID.Block, TileType.LeftFloor));
-				else if(xx==getWidth()-3)
-					Game.handler.add(new Tile(xx * 32, yy * 32, ID.Block, TileType.RightFloor));
-			}
-			if(xx>1&&xx<getWidth()-2) {
-				if(yy==getHeight()-3)
-			 		Game.handler.add(new Tile(xx * 32, yy * 32, ID.Block, TileType.DownFloor));
-				else if(yy==2)
-					Game.handler.add(new Tile(xx * 32, yy * 32, ID.Block, TileType.UpFloor));
-			}
-	}
-
-
 }

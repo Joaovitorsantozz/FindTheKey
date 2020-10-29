@@ -60,7 +60,7 @@ public class Player extends GameObject {
         }
         if (hand.isJump()) {
             if (canJump)
-             setVelY(-20);
+             setVelY(-15);
             canJump = false;
         }
     }
@@ -84,7 +84,7 @@ public class Player extends GameObject {
                 if (getRightP().intersects(e.getP()))
                     x = getX() - e.getWidth()+25;
                 if (getLeftP().intersects(e.getP()))
-                    x = e.getX() + (getWidth() / 2)-5;
+                    x = e.getX() + (getWidth()/2)-10;
             }
         }
     }
@@ -96,7 +96,8 @@ public class Player extends GameObject {
         else if(!Moving((int)speed,hand))an.setAnimation(idle);
         //Switch Image\\
         if(dir==1)g.drawImage(an.getAnimation(),getX(),getY(),96,96,null);
-        else if(dir==-1)g.drawImage(an.getAnimation(),getX()+48,getY(),-96,96,null);
+        else if(dir==-1)g.drawImage(an.getAnimation(),getX()+68,getY(),-96,96,null);
+
     }
 
 
@@ -116,7 +117,7 @@ public class Player extends GameObject {
 
     public Rectangle getRightP() {return new Rectangle(getX() + (getWidth())+3, getY()+5, 5, getHeight() - 10);}
     public Rectangle getLeftP() {return new Rectangle(getX()+13, getY()+5, 5, getHeight() - 10); }
-    public Rectangle getToP() {return new Rectangle(getX() + (getWidth() / 2) - ((getWidth() / 2) / 2)+10, getY(), getWidth() / 2, getHeight() / 2);}
+    public Rectangle getToP() {return new Rectangle(getX() + (getWidth() / 2) - ((getWidth() / 2) / 2)+10, getY()+20, getWidth() / 2, getHeight() / 2-20);}
     public Rectangle HitDetection() {return new Rectangle((int) getX() - 75, getY(), 200, 120);}
 
 
