@@ -150,7 +150,7 @@ public abstract class GameObject {
 	public void setDir(int dir) {
 		this.dir = dir;
 	}
-		
+
 	/*
 	 * protected void Gravity(GameObject obj, boolean jump) { vspd
 	 * +=obj.getGravity(); if (!CheckCol((int) x, (int) (y + 1), obj) && jump) {
