@@ -66,9 +66,10 @@ public class Cronometer {
         g.drawString(setFormatTime(),x+85,y+60);
     }
     public void createRectangle(Graphics g){
-        g.setColor(Color.black);
+        //escuro
+        g.setColor(new Color(135,60,14));
         g.fillRect(x+64,y+30,40*3,16*2);
-        g.setColor(Color.white);
+        g.setColor(new Color(86,38,8));
         for(int i=0;i<5;i++){
             g.drawRect((x+64)+i,(y+30)+i,40*3,16*2);
         }

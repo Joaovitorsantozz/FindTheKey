@@ -9,7 +9,9 @@ public enum ID {
 	Player(),
 	Block(),
 	Back(),
-	Key();
+	Key(),
+	Door(),
+	Particle();
 
 
 	public BufferedImage SetImage(BufferedImage spr) {

@@ -1,5 +1,6 @@
 package World;
 
+import Entity.Door;
 import Entity.ID;
 import Entity.Key;
 import GameObject.GameObject;
@@ -42,8 +43,9 @@ public class Level extends World {
 					}
 				}
 				if(pa==0xFFFFD800)Game.handler.add(new Key(xx*32,yy*32, ID.Key));
+				if(pa==0xFF16100C)Game.handler.add(new Door(xx*32,yy*32-90,ID.Door));
 				if(pa==0xFFFFFFFF){
-					Game.handler.add(new Tile(xx*32,yy*32,ID.Block,TileType.Stone));
+					Game.handler.add(new Tile(xx*32,yy*32,ID.Block,TileType.PolStone));
 					if(pixel[xx+((yy-1)*getWidth())]!=0xFFFFFFFF){
 						Game.handler.add(new Tile(xx*32,yy*32-32,ID.Block,TileType.DownFloor));
 					}

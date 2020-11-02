@@ -1,6 +1,8 @@
 package GameObject;
 
 
+import Entity.particles.Particles;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ import java.util.List;
 
 public class GameObjectHandler {
 	public List<GameObject> object = new ArrayList<GameObject>();
-
+	public List<Particles>particles=new ArrayList<Particles>();
 	private boolean right = false, left = false, jump = false,attack;
 
 	public void update() {
@@ -18,7 +20,10 @@ public class GameObjectHandler {
 			GameObject e = object.get(i);
 			e.tick();
 		}
-
+		for(int i=0;i<particles.size();i++){
+			Particles p=particles.get(i);
+			p.tick();
+		}
 	}
 
 	public void render(Graphics2D g) {
@@ -27,16 +32,13 @@ public class GameObjectHandler {
 			GameObject e = object.get(i);
 			e.render(g);
 		}
-
+		for(int i=0;i<particles.size();i++){
+			Particles p=particles.get(i);
+			p.render(g);
+		}
 	}
 
-	public void DrawLife(Graphics2D g,double l,double ml,int x,int y,int w,int h,BufferedImage barModel,BufferedImage barfill,BufferedImage gear) {
-		
-		int curLife = (int) ((l / ml) * w);
-		g.drawImage(barfill,x+w, y+h,(barfill.getWidth()*w),(barfill.getHeight()*h),null);
-		g.drawImage(barModel,x, y,barModel.getWidth()*w,barModel.getHeight()*h,null);
-		g.drawImage(gear,x-15,y-5,gear.getWidth()*3,gear.getHeight()*3,null);
-	}
+
 	
 	public void add(GameObject obj) {
 		object.add(obj);

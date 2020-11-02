@@ -1,14 +1,19 @@
 package Entity;
 
+import Entity.particles.ParticleHandler;
+import Entity.particles.Particles;
 import GameObject.GameObject;
 import Main.Game;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class Key extends GameObject {
     private BufferedImage spr;
     private ID it;
+    public ParticleHandler ph;
+    public static boolean spaw;
     public Key(int x, int y, ID id) {
         super(x, y, id);
         setDepth(11);
@@ -16,13 +21,41 @@ public class Key extends GameObject {
         setHeight(48);
         this.it=id;
         spr=it.SetImage(spr);
+        ph=new ParticleHandler();
     }
 
     @Override
     public void tick() {
-        System.out.print("Vivp");
+        x += velX;
+        y += velY;
+        col();
+        gravity(true, 0.10f);
+        Collect();
     }
-
+    public void col(){
+        for(int i=0;i<Game.handler.object.size();i++){
+            GameObject ee=Game.handler.object.get(i);
+            if(ee.getId()==ID.Block){
+                if(getP().intersects(ee.getP())){
+                    y = ee.getY() - getHeight()+10;
+                }
+            }
+        }
+    }
+    public boolean Collect(){
+        for(int i=0;i<Game.handler.object.size();i++) {
+            GameObject ee = Game.handler.object.get(i);
+            if(ee.getId()==ID.Player){
+                if(getP().intersects(ee.getP())){
+                    Game.handler.DeleteObject(this);
+                    Player.hasKey=true;
+                    spaw=true;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     @Override
     public void render(Graphics g) {
         g.drawImage(spr,getX(),getY(),getWidth(),getHeight(),null);

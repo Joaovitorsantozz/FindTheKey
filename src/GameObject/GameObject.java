@@ -30,17 +30,12 @@ public abstract class GameObject {
 	public abstract Rectangle getLeftP();
 	public abstract Rectangle getToP();
 	
-	public static Comparator<GameObject> nodeSorter = new Comparator<GameObject>() {
-
-		@Override
-		public int compare(GameObject n0, GameObject n1) {
-			if (n1.depth < n0.depth)
-				return +1;
-			if (n1.depth > n0.depth)
-				return -1;
-			return 0;
-		}
-
+	public static Comparator<GameObject> nodeSorter = (Comparator<GameObject>) (n0, n1) -> {
+		if (n1.depth < n0.depth)
+			return +1;
+		if (n1.depth > n0.depth)
+			return -1;
+		return 0;
 	};
 
 	protected boolean Col(GameObject obj, Rectangle rect) {
@@ -56,7 +51,9 @@ public abstract class GameObject {
 		}
 		return false;
 	}
-
+	public double calculateDistance(int x1, int y1, int x2, int y2) {
+		return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+	}
 	protected boolean Moving(int speed,GameObjectHandler hand) {
 		// Right
 		if (hand.isRight()) {velX = speed;setDir(1);}
@@ -151,6 +148,14 @@ public abstract class GameObject {
 		this.dir = dir;
 	}
 
+	protected float gravity(boolean isAffect,float gravity){
+		if(isAffect){
+			velY+=gravity;
+			if(velY>10)
+				velY=10;
+		}
+		return velY;
+	}
 	/*
 	 * protected void Gravity(GameObject obj, boolean jump) { vspd
 	 * +=obj.getGravity(); if (!CheckCol((int) x, (int) (y + 1), obj) && jump) {

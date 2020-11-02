@@ -79,6 +79,7 @@ public class Game extends Canvas implements Runnable {
           //  g.drawString("FPS =" + Frames, 10, 50);
             //g.drawString("Updates =" + upd, 10, 90);
             handlergm.clock.render(g);
+            handlergm.invent.render(g2);
             g.dispose();
             bs.show();
         }
