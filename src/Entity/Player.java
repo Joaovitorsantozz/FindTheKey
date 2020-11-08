@@ -16,17 +16,18 @@ import Main.Game;
 import Main.HandlerGame;
 import Main.utils.Animator;
 import Main.utils.LoadImage;
+import World.LevelSwitch;
 import World.Tile;
 import World.TileType;
-
+import GameObject.Camera;
 public class Player extends GameObject {
     public GameObjectHandler hand;
     private float speed = 7;
-    public boolean isFalling, canJump;
-    public static boolean hasKey,canWallJump,wallJump;
+    public boolean isFalling, canJump,interact,hasKey;
+    public static boolean canWallJump,wallJump;
     private int maxFrames = 5, maxIndex = 8;
     private BufferedImage sprP,
-            anim[] = new BufferedImage[8], idle[] = new BufferedImage[8];
+            anim[], idle[];
     private int count=120;
     Animator an;
 
@@ -35,7 +36,7 @@ public class Player extends GameObject {
         // TODO Auto-generated constructor stub
         this.hand = hand;
         this.dir = 1;
-        setDepth(10);
+        setDepth(20);
         setWidth(16 * 3);
         setHeight(32 * 3);
         sprP = new LoadImage("/PlayerSheet.png").getImage();
@@ -56,7 +57,7 @@ public class Player extends GameObject {
             count++;
             if(count>10) {
                 new ParticleHandler().CreateAmount(
-                        3,35,getX(),getY(),new Color(0,100,50+new Random().nextInt(205))
+                        3,35,getX()-64,getY()+15,1.3f,1.3f,new Color(255,123+new Random().nextInt(132),0)
                 );
                 Key.spaw=false;
                 count=0;
@@ -65,15 +66,15 @@ public class Player extends GameObject {
         // Call Methods//
         Col();
         Moving((int) speed, hand);
-
+        System.out.println(hasKey);
     }
 
     public void Fall() {
         if (isFalling) {
             float grv = 1.4f;
             velY += grv;
-            if (velY > 10)
-                velY = 10;
+            if (velY > 15)
+                velY = 15;
         }
         if (hand.isJump()) {
             if (canJump)
@@ -116,7 +117,11 @@ public class Player extends GameObject {
                 }
                 if (getLeftP().intersects(e.getP())) {
                     x = e.getX() + (getWidth() / 2) - 10;
-                    if(e instanceof Tile && ((Tile) e).getTileType()== TileType.PolStone)canWallJump=true;
+                    if (e instanceof Tile && ((Tile) e).getTileType() == TileType.PolStone) canWallJump = true;
+                }
+            }else if(e.getId()==ID.Depth){
+                if(getP().intersects(e.getP())){
+                    LevelSwitch.rest=true;  
                 }
             }
         }

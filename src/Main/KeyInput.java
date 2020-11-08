@@ -7,6 +7,7 @@ import Entity.ID;
 import Entity.Player;
 import GameObject.GameObject;
 import GameObject.GameObjectHandler;
+import World.World;
 
 public class KeyInput extends KeyAdapter {
 	GameObjectHandler handler;
@@ -25,7 +26,9 @@ public class KeyInput extends KeyAdapter {
 				if (b == KeyEvent.VK_SPACE) handler.setJump(true);
 				if(b==KeyEvent.VK_SPACE&& Player.canWallJump)Player.wallJump=true;
 				if(b==KeyEvent.VK_SPACE&& Player.canWallJump)Player.wallJump=true;
+
 			}
+			if(obj instanceof Player)if(b==KeyEvent.VK_E)((Player) obj).interact=true;
 		}
 	}
 
@@ -37,6 +40,7 @@ public class KeyInput extends KeyAdapter {
 				if(b==KeyEvent.VK_D)handler.setRight(false);
 				if(b==KeyEvent.VK_A)handler.setLeft(false);
 				if(b==KeyEvent.VK_SPACE)handler.setJump(false);
+				if(obj instanceof Player)if(b==KeyEvent.VK_E)((Player) obj).interact=false;
 			}
 		}
 	}

@@ -1,6 +1,7 @@
 package GameObject;
 
 import Main.Game;
+import Main.HandlerGame;
 
 public class Camera {
 	private float x, y;
@@ -14,7 +15,7 @@ public class Camera {
 		x+=((obj.getX()-x)-Game.W/2)*0.03f;
 		y+=((obj.getY()-y)-Game.H/2)*0.03f;
 		if(x<=0)x=0;
-		if(x>=Game.W-520)x=Game.W-520;
+		if(x>=Game.W+HandlerGame.level.offset)x=Game.W+HandlerGame.level.offset;
 		if(y<=0)y=0;
 		if(y>=Game.H-410)y=Game.H-410;
 	}

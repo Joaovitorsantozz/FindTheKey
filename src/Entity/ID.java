@@ -8,7 +8,7 @@ import java.util.logging.Handler;
 public enum ID {
 	Player(),
 	Block(),
-	Back(),
+	Depth(),
 	Key(),
 	Door(),
 	Particle();

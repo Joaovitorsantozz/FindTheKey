@@ -1,6 +1,8 @@
 package Graphics.UI;
 
 import Entity.Player;
+import GameObject.GameObject;
+import Main.Game;
 import Main.HandlerGame;
 
 import java.awt.*;
@@ -27,8 +29,12 @@ public class Inventory {
     }
     public void render(Graphics2D g){
         CreateRectangle(g,maxSlots);
-        if(Player.hasKey){
-            g.drawImage(HandlerGame.spr.getSprite(64,0,16,16),x,y+5,48,48,null);
+        for(int i=0;i< Game.handler.object.size();i++) {
+            GameObject e=Game.handler.object.get(i);
+            if (e instanceof Player) {
+                if(((Player) e).hasKey)
+                g.drawImage(HandlerGame.spr.getSprite(64, 0, 16, 16), x, y + 5, 48, 48, null);
+            }
         }
     }
 }

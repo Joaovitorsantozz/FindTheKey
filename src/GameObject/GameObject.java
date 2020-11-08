@@ -30,27 +30,9 @@ public abstract class GameObject {
 	public abstract Rectangle getLeftP();
 	public abstract Rectangle getToP();
 	
-	public static Comparator<GameObject> nodeSorter = (Comparator<GameObject>) (n0, n1) -> {
-		if (n1.depth < n0.depth)
-			return +1;
-		if (n1.depth > n0.depth)
-			return -1;
-		return 0;
-	};
+	public static Comparator<GameObject> nodeSorter = Comparator.comparingInt(n0 -> n0.depth);
 
-	protected boolean Col(GameObject obj, Rectangle rect) {
-		for (int i = 0; i < Game.handler.object.size(); i++) {
-			GameObject e = Game.handler.object.get(i);
-			if (e.getId() == ID.Block) {
-				if (rect.intersects(e.getP())) {
-					obj.y += obj.velY * -1;
-					obj.x += obj.velX * -1;
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+
 	public double calculateDistance(int x1, int y1, int x2, int y2) {
 		return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 	}
@@ -64,90 +46,67 @@ public abstract class GameObject {
 		// Value
 
 		//
-		if (velX != 0)return true;
-		return false;
+		return velX != 0;
 	}
 	
 	public int getWidth() {
 		return width;
 	}
-
 	public void setWidth(int width) {
 		this.width = width;
 	}
-
 	public int getHeight() {
 		return height;
 	}
-
 	public void setHeight(int height) {
 		this.height = height;
 	}
-
 	public void setId(ID id) {
 		this.id = id;
 	}
-
 	public int getDepth() {
 		return depth;
 	}
-
 	public void setDepth(int depth) {
 		this.depth = depth;
 	}
-
 	public int getX() {
-		return (int) this.x;
+		return this.x;
 	}
-
 	public void setX(int nx) {
 		this.x = nx;
 	}
-
 	public int getY() {
-		return (int) this.y;
+		return  this.y;
 	}
-
 	public void setY(int ny) {
 		this.y = ny;
 	}
-
-	public float getVelX() {
-		return velX;
-	}
-
+	public float getVelX() { return velX; }
 	public void setVelX(float velX) {
 		this.velX = velX;
 	}
-
 	public float getVelY() {
 		return velY;
 	}
-
 	public void setVelY(float velY) {
 		this.velY = velY;
 	}
-
 	public ID getId() {
 		return id;
 	}
-
 	public int getDamage() {
 		return Damage;
 	}
-
 	public void setDamage(int damage) {
 		Damage = damage;
 	}
-
 	public int getDir() {
 		return dir;
 	}
-
 	public void setDir(int dir) {
 		this.dir = dir;
 	}
-
 	protected float gravity(boolean isAffect,float gravity){
 		if(isAffect){
 			velY+=gravity;

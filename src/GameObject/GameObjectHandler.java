@@ -4,42 +4,27 @@ package GameObject;
 import Entity.particles.Particles;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 public class GameObjectHandler {
-	public List<GameObject> object = new ArrayList<GameObject>();
-	public List<Particles>particles=new ArrayList<Particles>();
+	public List<GameObject> object = new ArrayList<>();
+	public List<Particles>particles= new ArrayList<>();
 	private boolean right = false, left = false, jump = false,attack;
-
 	public void update() {
-		for (int i = 0; i < object.size(); i++) {
-			GameObject e = object.get(i);
-			e.tick();
-		}
-		for(int i=0;i<particles.size();i++){
-			Particles p=particles.get(i);
-			p.tick();
-		}
+		for (int i=0;i<object.size();i++) { object.get(i).tick(); }
+		for (int i=0;i<particles.size();i++) { particles.get(i).tick(); }
+		object.sort(GameObject.nodeSorter);
 	}
 
 	public void render(Graphics2D g) {
-		Collections.sort(object, GameObject.nodeSorter);
-		for (int i = 0; i < object.size(); i++) {
-			GameObject e = object.get(i);
-			e.render(g);
-		}
-		for(int i=0;i<particles.size();i++){
-			Particles p=particles.get(i);
-			p.render(g);
-		}
+		for (int i=0;i<object.size();i++) { object.get(i).render(g); }
+		for (int i=0;i<particles.size();i++) { particles.get(i).render(g); }
+
 	}
-
-
-	
+	public void ClearObjects(){
+		object.clear();
+	}
 	public void add(GameObject obj) {
 		object.add(obj);
 	}
@@ -72,11 +57,5 @@ public class GameObjectHandler {
 		this.left = left;
 	}
 
-	public boolean isAttack() {
-		return attack;
-	}
 
-	public void setAttack(boolean attack) {
-		this.attack = attack;
-	}
 }

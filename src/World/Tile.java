@@ -1,24 +1,24 @@
 package World;
 
-import java.awt.Graphics;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import Entity.ID;
+import Entity.particles.ParticleHandler;
 import GameObject.GameObject;
-import Main.Game;
 import Main.HandlerGame;
 
 public class Tile extends GameObject {
 	private BufferedImage spr;
 	private TileType t;
-	private int w = 32, h = 32;
+	private final int w = 32, h = 32;
 
 	public Tile(int x, int y, ID id, TileType tt) {
 		super(x, y, id);
 		// TODO Auto-generated constructor stub
 		t = tt;
-		setDepth(1);
+		setDepth(100);
 		setWidth(32);
 		setHeight(32);
 		spr=t.SetImage(spr);
@@ -27,7 +27,12 @@ public class Tile extends GameObject {
 
 	@Override
 	public void tick() {
-	
+
+		if(getTileType()==TileType.UpLava){
+			if(new Random().nextInt(100)==1)new ParticleHandler().CreateParticlesImage(
+					5,getX(),getY(),0,0.8f,HandlerGame.spr.getSprite(64,16,16,16)
+			);
+		}
 	}
 
 

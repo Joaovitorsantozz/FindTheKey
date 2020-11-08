@@ -11,7 +11,7 @@ public class Animator{
         this.anim=new BufferedImage[maxIndex];
     }
     public BufferedImage getAnimation() {
-        frames+=2;
+        frames++;
         if(frames>maxFrames){
             frames=0;
             index++;
@@ -24,8 +24,12 @@ public class Animator{
     public void setAnimation(BufferedImage anim[]){
         this.anim=anim;
     }
+
     public int getMaxFrames() {
         return maxFrames;
+    }
+    public int getIndex(){
+        return index;
     }
     public void setMaxFrames(int maxFrames) {
         this.maxFrames = maxFrames;

@@ -1,17 +1,14 @@
 package Entity;
 
 import Entity.particles.ParticleHandler;
-import Entity.particles.Particles;
 import GameObject.GameObject;
 import Main.Game;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Random;
 
 public class Key extends GameObject {
     private BufferedImage spr;
-    private ID it;
     public ParticleHandler ph;
     public static boolean spaw;
     public Key(int x, int y, ID id) {
@@ -19,8 +16,7 @@ public class Key extends GameObject {
         setDepth(11);
         setWidth(48);
         setHeight(48);
-        this.it=id;
-        spr=it.SetImage(spr);
+        spr= id.SetImage(spr);
         ph=new ParticleHandler();
     }
 
@@ -42,19 +38,17 @@ public class Key extends GameObject {
             }
         }
     }
-    public boolean Collect(){
+    public void Collect(){
         for(int i=0;i<Game.handler.object.size();i++) {
             GameObject ee = Game.handler.object.get(i);
-            if(ee.getId()==ID.Player){
+            if(ee instanceof Player){
                 if(getP().intersects(ee.getP())){
+                    ((Player) ee).hasKey=true;
                     Game.handler.DeleteObject(this);
-                    Player.hasKey=true;
                     spaw=true;
-                    return true;
                 }
             }
         }
-        return false;
     }
     @Override
     public void render(Graphics g) {
