@@ -1,12 +1,13 @@
 package World;
 
+import Graphics.UI.Cronometer;
 import Main.Game;
 import Main.HandlerGame;
 
 public class LevelSwitch {
     public static int LEVEL=1;
     public static boolean next,rest;
-    public int Offset;
+    public int sec,m;
     public void upd(){
         if(next){
             next=false;
@@ -22,6 +23,8 @@ public class LevelSwitch {
         LEVEL++;
         String nt="/Level/level"+LEVEL+".png";
         HandlerGame.level=new Level(nt,520);
+        Time();
+        Game.handlergame.clock=new Cronometer(40,40,getMin(),getSec());
     }
     public int OffSet(){
         int offset=-520;
@@ -34,8 +37,29 @@ public class LevelSwitch {
         }
         return offset;
     }
+    public void Time(){
+        switch (LEVEL) {
+            case 1 -> {
+                m = 0;
+                sec = 10;
+            }
+            case 2 -> {
+                m = 0;
+                sec = 30;
+            }
+        }
+    }
     public void Restart(){
         Game.handler.ClearObjects();
+        Time();
         HandlerGame.level=new Level("/Level/level"+LEVEL+".png",OffSet());
+        Game.handlergame.clock=new Cronometer(40,40,getMin(),getSec());
+    }
+
+    private int getSec(){
+        return sec;
+    }
+    private int getMin(){
+        return m;
     }
 }

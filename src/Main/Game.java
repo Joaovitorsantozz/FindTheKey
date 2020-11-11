@@ -4,6 +4,7 @@ import Entity.ID;
 import GameObject.GameObjectHandler;
 import Graphics.Parallax;
 import Main.utils.FontStyle;
+import Main.utils.Text;
 import World.LevelSwitch;
 
 import java.awt.*;
@@ -76,8 +77,10 @@ public class Game extends Canvas implements Runnable {
             g2.translate(handlergame.cam.getX(), handlergame.cam.getY());
             /////////////////////////////////
             g.setColor(Color.white);
-          //  g.drawString("FPS =" + Frames, 10, 50);
-            //g.drawString("Updates =" + upd, 10, 90);
+            new Text(
+                    FontStyle.getFont(40,20),"Vou te comer",800,50).DrawText(g,new Color(0,100,0,100));
+            g.drawString("FPS =" + Frames, 1000, 50);
+            g.drawString("Updates =" + upd,1000,90);
             handlergame.clock.render(g);
             handlergame.invent.render(g2);
             g.dispose();

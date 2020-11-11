@@ -9,6 +9,7 @@ import java.io.IOException;
 
 public class Level extends World {
 	public int offset;
+
 	public Level(String dir,int Offset) {
 		super(dir);
 		offset=Offset;

@@ -50,8 +50,8 @@ public class Player extends GameObject {
     public void tick() {
         // Do logic
         Fall();
-        x += velX;
-        y += velY;
+        x += getVelX();
+        y += getVelY();
         ///// Logic/////
         if(Key.spaw) {
             count++;
@@ -66,7 +66,6 @@ public class Player extends GameObject {
         // Call Methods//
         Col();
         Moving((int) speed, hand);
-        System.out.println(hasKey);
     }
 
     public void Fall() {
@@ -108,7 +107,7 @@ public class Player extends GameObject {
                     isFalling = true;
                 }
                 if (getToP().intersects(e.getP())) {
-                    y = e.getY() + 32;
+                    y = e.getY()+32;
                     velY = 0;
                 }
                 if (getRightP().intersects(e.getP())) {
@@ -135,8 +134,8 @@ public class Player extends GameObject {
         //Draw Key\\
 
         //Switch Image\\
-        if (dir == 1) g.drawImage(an.getAnimation(), getX(), getY(), 96, 96, null);
-        else if (dir == -1) g.drawImage(an.getAnimation(), getX() + 68, getY(), -96, 96, null);
+        if (getDir() == 1) g.drawImage(an.getAnimation(), getX(), getY(), 96, 96, null);
+        else if (getDir() == -1) g.drawImage(an.getAnimation(), getX() + 68, getY(), -96, 96, null);
 
     }
 

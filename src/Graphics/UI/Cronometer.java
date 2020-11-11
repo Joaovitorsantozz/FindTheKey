@@ -5,6 +5,8 @@ import GameObject.GameObject;
 import Main.Game;
 import Main.utils.FontStyle;
 import Main.utils.LoadImage;
+import World.Level;
+import World.LevelSwitch;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -13,16 +15,19 @@ import java.sql.SQLOutput;
 public class Cronometer {
     public BufferedImage clock;
     private int x,y;
-    private int seconds=59,minutes=0,milis;
-    public Cronometer(int x, int y,int mm) {
+    private int seconds=0,minutes=0,milis;
+    public Cronometer(int x, int y,int mm,int sec) {
         clock=new LoadImage("/UI/Clock.png").getImage();
         this.x=x;
         this.y=y;
         this.minutes=mm;
+        this.seconds=sec;
+
     }
 
     public void tick() {
         CountSeconds(milis,seconds,minutes);
+        if(minutes==0&&seconds<=0) LevelSwitch.rest=true;
         setFormatTime();
     }
     public void CountSeconds(int milis,int seconds,int minutes){

@@ -10,15 +10,15 @@ import java.util.Random;
 
 public class Particles extends GameObject {
     Color color;
-    public int life=50;
+    public int life=150;
     private double dx,dy;
     public BufferedImage particle;
     boolean oval;
     double rotate;
     public Particles(int x, int y,float velX,float velY,Color color,ID id,BufferedImage part) {
         super(x, y, id);
-        setWidth(16);
-        setHeight(16);
+        setWidth(256);
+        setHeight(256);
         dx=new Random().nextGaussian();
         dy=new Random().nextGaussian();
         this.color=color;

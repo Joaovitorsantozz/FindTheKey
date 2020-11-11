@@ -15,11 +15,8 @@ public enum ID {
 
 
 	public BufferedImage SetImage(BufferedImage spr) {
-		switch(this){
-			case Key:spr= HandlerGame.spr.getSprite(64,0,16,16);
-				break;
-			default:
-				break;
+		if (this == ID.Key) {
+			spr = HandlerGame.spr.getSprite(64, 0, 16, 16);
 		}
 		return spr;
 	}

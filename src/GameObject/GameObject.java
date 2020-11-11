@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 import java.util.Comparator;
 
 import Entity.ID;
-import Main.Game;
 
 
 public abstract class GameObject {
@@ -14,7 +13,6 @@ public abstract class GameObject {
 	protected ID id;
 	protected int depth;
 	private int width, height;
-	private int Damage;
 	public GameObject(int x, int y, ID id) {
 		this.x = x;
 		this.y = y;
@@ -95,37 +93,18 @@ public abstract class GameObject {
 	public ID getId() {
 		return id;
 	}
-	public int getDamage() {
-		return Damage;
-	}
-	public void setDamage(int damage) {
-		Damage = damage;
-	}
 	public int getDir() {
 		return dir;
 	}
 	public void setDir(int dir) {
 		this.dir = dir;
 	}
-	protected float gravity(boolean isAffect,float gravity){
+	protected void gravity(boolean isAffect, float gravity){
 		if(isAffect){
 			velY+=gravity;
 			if(velY>10)
 				velY=10;
 		}
-		return velY;
 	}
-	/*
-	 * protected void Gravity(GameObject obj, boolean jump) { vspd
-	 * +=obj.getGravity(); if (!CheckCol((int) x, (int) (y + 1), obj) && jump) {
-	 * vspd = -8; jump = false; }
-	 * 
-	 * if (!CheckCol((int) x, (int) (y + obj.getVspd()), obj)) {
-	 * 
-	 * int signVsp = 0; if (vspd >= 0) { signVsp = 1; } else { signVsp = -1; } while
-	 * (CheckCol((int) x, (int) (y + signVsp), obj)) { y = y + signVsp; } vspd = 0;
-	 * }
-	 * 
-	 * y = (int) (y + vspd); }
-	 */
+
 }

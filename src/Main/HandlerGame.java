@@ -20,7 +20,7 @@ public class HandlerGame {
 		font = new FontStyle();
 		cam = new Camera(0, 0);
 		level = new Level("/Level/level1.png",-520);
-		clock=new Cronometer(40,40,3);
+		clock=new Cronometer(40,40,0,10);
 		invent=new Inventory(60,150,1);
 	}
 
