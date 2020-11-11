@@ -18,13 +18,14 @@ public class Game extends Canvas implements Runnable {
     public int Frames, upd;
     public static final int W = 1280, H = 730;
     public static HandlerGame handlergame;
-
+    public Text text;
     public Game() {
         new Windows(W, H, "Engine", this);
         // Instancias
         handler = new GameObjectHandler();
         handlergame = new HandlerGame();
         this.addKeyListener(new KeyInput(handler));
+        text=new Text(FontStyle.getFont(100,100),"Aoba",500,500);
         //
         start();
     }
@@ -77,10 +78,9 @@ public class Game extends Canvas implements Runnable {
             g2.translate(handlergame.cam.getX(), handlergame.cam.getY());
             /////////////////////////////////
             g.setColor(Color.white);
-            new Text(
-                    FontStyle.getFont(40,20),"Vou te comer",800,50).DrawText(g,new Color(0,100,0,100));
             g.drawString("FPS =" + Frames, 1000, 50);
             g.drawString("Updates =" + upd,1000,90);
+            text.DrawText(g,new Color(255,255,255),"Flashes");
             handlergame.clock.render(g);
             handlergame.invent.render(g2);
             g.dispose();

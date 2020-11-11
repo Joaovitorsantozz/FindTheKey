@@ -4,21 +4,24 @@ import Entity.ID;
 import GameObject.GameObject;
 import Main.Game;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class Particles extends GameObject {
     Color color;
-    public int life=150;
+    public int life=50;
     private double dx,dy;
     public BufferedImage particle;
     boolean oval;
     double rotate;
     public Particles(int x, int y,float velX,float velY,Color color,ID id,BufferedImage part) {
         super(x, y, id);
-        setWidth(256);
-        setHeight(256);
+        setWidth(16);
+        setHeight(16);
         dx=new Random().nextGaussian();
         dy=new Random().nextGaussian();
         this.color=color;

@@ -14,18 +14,21 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Door extends GameObject {
-    public BufferedImage spr, lock, atualDraw = null,
-            open[] = new BufferedImage[4],openld;
+    public BufferedImage spr;
+    public BufferedImage lock;
+    public BufferedImage atualDraw = null;
+    public BufferedImage[] open;
+    public BufferedImage openld;
     public boolean showDraw,isOpen;
     Animator an;
-    int maxFrames = 15, maxIndex = 4;
+    int maxFrames = 5, maxIndex = 4;
 
     public Door(int x, int y, ID id) {
         super(x, y, id);
         spr = new LoadImage("/GameObject/Door.png").getImage();
         lock = new LoadImage("/GameObject/Lock.png").getImage();
         openld=new LoadImage("/GameObject/Dooropen.png").getImage();
-        open=new LoadImage(null).Cut(4,0,0,40,45,openld);
+        open=new LoadImage(null).Cut(9,0,0,40,45,openld);
         atualDraw = spr;
         setWidth(32 * 3);
         setHeight(41 * 3);

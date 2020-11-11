@@ -5,7 +5,7 @@ import Main.Game;
 import Main.HandlerGame;
 
 public class LevelSwitch {
-    public static int LEVEL=1;
+    public static int LEVEL=3;
     public static boolean next,rest;
     public int sec,m;
     public void upd(){
@@ -31,9 +31,8 @@ public class LevelSwitch {
         switch (LEVEL){
             case 1:offset=-520;
                 break;
-            case 2:offset=520;
-                break;
-            default:break;
+            case 2,3:offset=520;
+            default: break;
         }
         return offset;
     }
@@ -45,7 +44,11 @@ public class LevelSwitch {
             }
             case 2 -> {
                 m = 0;
-                sec = 30;
+                sec = 20;
+            }
+            default -> {
+                m=0;
+                sec=30;
             }
         }
     }
