@@ -1,15 +1,17 @@
-package Graphics;
 
-import java.awt.Color;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 
-import Entity.ID;
-import GameObject.GameObject;
-import Main.Game;
-import Main.HandlerGame;
-import Main.utils.LoadImage;
+		package Graphics;
+
+		import java.awt.Color;
+		import java.awt.GradientPaint;
+		import java.awt.Graphics;
+		import java.awt.Graphics2D;
+
+		import Entity.ID;
+		import GameObject.GameObject;
+		import Main.Game;
+		import Main.HandlerGame;
+		import Main.utils.LoadImage;
 
 public class Parallax {
 	// ONLY BASIC PARALLAX
@@ -40,9 +42,9 @@ public class Parallax {
 		Color c1=new Color(255, 0, 0, 255);
 		GradientPaint p=new GradientPaint(0,0,c2,0,h*4,c1);
 		g2.setPaint(p);
-		g.fillRect(x+velx,0,w,h);
+		g.fillRect(x+velx,0,w*3,h);
 		g.fillRect(x,0,w,h);
-		g.fillRect(x-velx,0,w,h);
+		g.fillRect(x-velx,0,w*3,h);
 
 	}
 

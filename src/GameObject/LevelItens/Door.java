@@ -19,16 +19,16 @@ public class Door extends GameObject {
     public BufferedImage atualDraw = null;
     public BufferedImage[] open;
     public BufferedImage openld;
-    public boolean showDraw,isOpen;
+    public boolean showDraw, isOpen;
     Animator an;
-    int maxFrames = 5, maxIndex = 4;
+    int maxFrames = 5, maxIndex = 9;
 
     public Door(int x, int y, ID id) {
         super(x, y, id);
         spr = new LoadImage("/GameObject/Door.png").getImage();
         lock = new LoadImage("/GameObject/Lock.png").getImage();
-        openld=new LoadImage("/GameObject/Dooropen.png").getImage();
-        open=new LoadImage(null).Cut(9,0,0,40,45,openld);
+        openld = new LoadImage("/GameObject/Dooropen.png").getImage();
+        open = new LoadImage(null).Cut(9, 0, 0, 40, 45, openld);
         atualDraw = spr;
         setWidth(32 * 3);
         setHeight(41 * 3);
@@ -55,19 +55,21 @@ public class Door extends GameObject {
         for (int i = 0; i < Game.handler.object.size(); i++) {
             GameObject e = Game.handler.object.get(i);
             if (e instanceof Player) {
-                if (((Player) e).interact) {
-                    if(((Player)e).hasKey) {
-                        an.setAnimation(open);
-                        isOpen = true;
-                        ((Player)e).hasKey = false;
+                if (calculateDistance(getX(), getY(), e.getX(), e.getY()) < 160) {
+                    if (((Player) e).interact) {
+                        if (((Player) e).hasKey) {
+                            an.setAnimation(open);
+                            isOpen = true;
+                            ((Player) e).hasKey = false;
+                        }
                     }
                 }
             }
-            if(an.getIndex()>=3){
-                LevelSwitch.next=true;
-                showDraw=false;
-                isOpen=false;
-                spr=openld.getSubimage(0,45*3,40,45);
+            if (an.getIndex() >= 8) {
+                LevelSwitch.next = true;
+                showDraw = false;
+                isOpen = false;
+                spr = openld.getSubimage(0, 45 * 3, 40, 45);
             }
         }
     }
@@ -78,8 +80,7 @@ public class Door extends GameObject {
             g.drawImage(spr, getX(), getY(), getWidth(), getHeight(), null);
             if (showDraw)
                 g.drawImage(atualDraw, getX() + 32, getY() - 60, atualDraw.getWidth() * 3, atualDraw.getHeight() * 3, null);
-        }
-        else g.drawImage(an.getAnimation(), getX(), getY(), getWidth(), getHeight(), null);
+        } else g.drawImage(an.getAnimation(), getX(), getY(), getWidth(), getHeight(), null);
     }
 
     @Override

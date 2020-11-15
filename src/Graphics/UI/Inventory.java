@@ -4,6 +4,7 @@ import Entity.Player;
 import GameObject.GameObject;
 import Main.Game;
 import Main.HandlerGame;
+import Main.utils.CustomColor;
 
 import java.awt.*;
 
@@ -19,12 +20,12 @@ public class Inventory {
     }
     public void CreateRectangle(Graphics2D g, int maxSlots){
         for(int i=0;i<maxSlots;i++){
-            g.setColor(new Color(135,60,14));
-            g.fillRect(x+(i*width),y,width+2,height+2);
+            g.setColor(CustomColor.lightbrown);
+            g.fillRect((x+16)+(i*width),y-38,width+2,height+2);
         }
         for(int i=0;i<5;i++){
-            g.setColor(new Color(99,44,9));
-            g.drawRect(x+i,y+i,width+1,height+1);
+            g.setColor(CustomColor.brown);
+            g.drawRect((x+16)+i,(y-38)+i,width+1,height+1);
         }
     }
     public void render(Graphics2D g){
@@ -33,7 +34,7 @@ public class Inventory {
             GameObject e=Game.handler.object.get(i);
             if (e instanceof Player) {
                 if(((Player) e).hasKey)
-                g.drawImage(HandlerGame.spr.getSprite(64, 0, 16, 16), x, y + 5, 48, 48, null);
+                g.drawImage(HandlerGame.spr.getSprite(64, 0, 16, 16), x+16, y - 34, 48, 48, null);
             }
         }
     }

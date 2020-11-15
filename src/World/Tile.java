@@ -12,7 +12,7 @@ import Main.HandlerGame;
 public class Tile extends GameObject {
 	private BufferedImage spr;
 	private TileType t;
-	private final int w = 32, h = 32;
+
 
 	public Tile(int x, int y, ID id, TileType tt) {
 		super(x, y, id);
@@ -21,7 +21,7 @@ public class Tile extends GameObject {
 		setDepth(100);
 		setWidth(32);
 		setHeight(32);
-		spr=t.SetImage(spr);
+		spr=t.SetImage(spr,this);
 		
 	}
 
@@ -53,7 +53,7 @@ public class Tile extends GameObject {
 
 	@Override
 
-	public Rectangle getP() {return new Rectangle((int) (getX() + (getWidth() / 2) - ((getWidth() / 2) / 2)),(int) (getY() + (getHeight() / 2)), w / 2, h / 2); }
+	public Rectangle getP() {return new Rectangle((int) (getX() + (getWidth() / 2) - ((getWidth() / 2) / 2)),(int) (getY() + (getHeight() / 2)), getWidth() / 2, getHeight() / 2); }
 
 	public Rectangle getRightP() {
 		return new Rectangle(getX(),getY(),getWidth(),getHeight());
@@ -64,6 +64,6 @@ public class Tile extends GameObject {
 	}
 
 	public Rectangle getToP() {
-		return new Rectangle(getX() + (getWidth() / 2) - ((getWidth() / 2) / 2), getY(), w / 2, h / 2);
+		return new Rectangle(getX() + (getWidth() / 2) - ((getWidth() / 2) / 2), getY(), getWidth() / 2, getHeight() / 2);
 	}
 }

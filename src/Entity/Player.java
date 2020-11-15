@@ -15,6 +15,7 @@ import GameObject.GameObjectHandler;
 import Main.Game;
 import Main.HandlerGame;
 import Main.utils.Animator;
+import Main.utils.CustomColor;
 import Main.utils.LoadImage;
 import World.LevelSwitch;
 import World.Tile;
@@ -57,7 +58,8 @@ public class Player extends GameObject {
             count++;
             if(count>10) {
                 new ParticleHandler().CreateAmount(
-                        3,35,getX()-64,getY()+15,1.3f,1.3f,new Color(255,123+new Random().nextInt(132),0)
+                        3,35,getX()-64,getY()+15,1.3f,1.3f,new Color
+                                (CustomColor.yellow.getRed(),CustomColor.yellow.getGreen(),CustomColor.yellow.getBlue())
                 );
                 Key.spaw=false;
                 count=0;

@@ -2,9 +2,8 @@ package Main;
 
 import Entity.ID;
 import GameObject.GameObjectHandler;
-import Graphics.Parallax;
 import Main.utils.FontStyle;
-import Main.utils.Text;
+import Main.utils.Text.Text;
 import World.LevelSwitch;
 
 import java.awt.*;
@@ -25,7 +24,7 @@ public class Game extends Canvas implements Runnable {
         handler = new GameObjectHandler();
         handlergame = new HandlerGame();
         this.addKeyListener(new KeyInput(handler));
-        text=new Text(FontStyle.getFont(100,100),"Aoba",500,500);
+        text=new Text(FontStyle.getFont(150,Font.BOLD),"Aoba",300,500);
         //
         start();
     }
@@ -45,9 +44,8 @@ public class Game extends Canvas implements Runnable {
         if (Thread.currentThread().getName().equals("TickThread")) {
             handler.update();
             UpdateCam();
-            handlergame.clock.tick();
-            new Parallax().tick();
             new LevelSwitch().upd();
+            handlergame.tick();
         }
     }
 
@@ -73,16 +71,18 @@ public class Game extends Canvas implements Runnable {
             g.setFont(FontStyle.getFont(40, 20));
             /////////////////////////////////
             g2.translate(-handlergame.cam.getX(), -handlergame.cam.getY());
-            new Parallax().render(g);
+            handlergame.render(g);
             handler.render(g2);//GO
             g2.translate(handlergame.cam.getX(), handlergame.cam.getY());
             /////////////////////////////////
+            //Things that will be not affect by cam
             g.setColor(Color.white);
             g.drawString("FPS =" + Frames, 1000, 50);
             g.drawString("Updates =" + upd,1000,90);
-            text.DrawText(g,new Color(255,255,255),"Flashes");
             handlergame.clock.render(g);
             handlergame.invent.render(g2);
+            ////////////////////////////////////////////
+            text.DrawText(g,new Color(37, 29, 220),"Gradient");
             g.dispose();
             bs.show();
         }

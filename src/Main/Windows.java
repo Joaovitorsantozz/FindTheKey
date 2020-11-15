@@ -16,6 +16,7 @@ public class Windows {
 		jframe.setMaximumSize(new Dimension(width, height));
 		jframe.setMinimumSize(new Dimension(width, height));
 		jframe.add(game, BorderLayout.CENTER);
+		jframe.setUndecorated(true);
 		jframe.setResizable(false);
 		jframe.pack();
 		jframe.setLocationRelativeTo(null);

@@ -1,5 +1,6 @@
 package World;
 
+import GameObject.LevelItens.Box;
 import GameObject.LevelItens.Door;
 import Entity.ID;
 import Entity.Key;
@@ -77,6 +78,7 @@ public  class World {
         if(pa==0xFFFFD800)Game.handler.add(new Key(xx*32,yy*32, ID.Key));
         if(pa==0xFF16100C)Game.handler.add(new Door(xx*32,yy*32-90,ID.Door));
         if(pa==0xFF404040)Game.handler.add(new Saw(xx*32-26,yy*32-64,ID.Depth));
+        if(pa==0xFF1E0C00)Game.handler.add(new Box(xx*32,yy*32,ID.Block));
     }
 
 }

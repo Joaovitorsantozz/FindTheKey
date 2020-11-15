@@ -25,8 +25,6 @@ public class KeyInput extends KeyAdapter {
 				if (b == KeyEvent.VK_A) handler.setLeft(true);
 				if (b == KeyEvent.VK_SPACE) handler.setJump(true);
 				if(b==KeyEvent.VK_SPACE&& Player.canWallJump)Player.wallJump=true;
-				if(b==KeyEvent.VK_SPACE&& Player.canWallJump)Player.wallJump=true;
-
 			}
 			if(obj instanceof Player)if(b==KeyEvent.VK_E)((Player) obj).interact=true;
 		}

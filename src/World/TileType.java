@@ -14,7 +14,7 @@ public enum TileType {
 	PolStone(),
 	Lava(),
 	UpLava();
-	public BufferedImage SetImage(BufferedImage spr){
+	public BufferedImage SetImage(BufferedImage spr,Tile t){
 		switch (this) {
 			case UpFloor:spr=HandlerGame.spr.getSprite(0,16,16,16);
 				break;

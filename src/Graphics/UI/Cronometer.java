@@ -3,6 +3,7 @@ package Graphics.UI;
 import Entity.ID;
 import GameObject.GameObject;
 import Main.Game;
+import Main.utils.CustomColor;
 import Main.utils.FontStyle;
 import Main.utils.LoadImage;
 import World.Level;
@@ -16,8 +17,9 @@ public class Cronometer {
     public BufferedImage clock;
     private int x,y;
     private int seconds=0,minutes=0,milis;
+    private int w=55*3,h=32+10;
     public Cronometer(int x, int y,int mm,int sec) {
-        clock=new LoadImage("/UI/Clock.png").getImage();
+        clock=new LoadImage("/UI/clock2.png").getImage();
         this.x=x;
         this.y=y;
         this.minutes=mm;
@@ -64,19 +66,18 @@ public class Cronometer {
     }
 
     public void render(Graphics g) {
-        createRectangle(g);
-        g.drawImage(clock, x, y, clock.getWidth() * 3, clock.getHeight() * 3, null);
+        g.drawImage(clock, x+20, y-72, clock.getWidth() * 3, clock.getHeight() * 3, null);
         g.setColor(Color.white);
         g.setFont(FontStyle.getFont(40, 20));
-        g.drawString(setFormatTime(),x+85,y+60);
+        g.drawString(setFormatTime(),x+95,y+45);
     }
     public void createRectangle(Graphics g){
-        //escuro
-        g.setColor(new Color(135,60,14));
-        g.fillRect(x+64,y+30,40*3,16*2);
-        g.setColor(new Color(86,38,8));
+        //claro
+        g.setColor(CustomColor.lightbrown);
+        g.fillRect(x+16,y+30,w,h);
+        g.setColor(CustomColor.brown);
         for(int i=0;i<5;i++){
-            g.drawRect((x+64)+i,(y+30)+i,40*3,16*2);
+            g.drawRect((x+16)+i,(y+30)+i,w,h);
         }
     }
 
