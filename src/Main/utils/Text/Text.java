@@ -14,6 +14,7 @@ public class Text {
     private String text;
     private final Font font;
     FlashString fs;
+    GradientString gradientString;
     public Text(Font font, String text, int x, int y) {
         this.x=x;
         this.y=y;
@@ -22,6 +23,7 @@ public class Text {
         if(font!=null)this.font=font;
         else this.font=new Font("arial", Font.BOLD,15);
         fs=new FlashString(font ,x,y);
+        gradientString=new GradientString(font,text,new Color(222, 11, 11),new Color(85, 22, 187));
     }
 
 
@@ -29,7 +31,7 @@ public class Text {
         switch (Effect) {
             case "Default" -> Default(g);
             case "Flash" -> fs.draw(g, text);
-            case "Gradient" -> new GradientString(font, text, Color.green, Color.cyan).paint(g, x, y);
+            case "Gradient" -> gradientString.animateString(g,x,y);
         }
     }
     public void Default(Graphics g){
