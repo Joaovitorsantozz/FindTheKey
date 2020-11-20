@@ -15,15 +15,15 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Player extends GameObject {
-    public GameObjectHandler hand;
-    private float speed = 5f;
+    private GameObjectHandler hand;
+    public float speed = 5f;
     public boolean isFalling, canJump,interact,hasKey;
     public static boolean canWallJump,wallJump;
     public int maxFrames = 2, maxIndex = 8;
     private BufferedImage sprP,
             anim[], idle[];
     private int count=120;
-    Animator an;
+    private Animator an;
 
     public Player(int x, int y, ID id, GameObjectHandler hand) {
         super(x, y, id);

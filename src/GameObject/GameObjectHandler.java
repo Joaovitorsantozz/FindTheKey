@@ -9,8 +9,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class GameObjectHandler {
-	public LinkedList<GameObject> object = new LinkedList<>();
-	public LinkedList<	Particles>particles= new LinkedList<>();
+	public List<GameObject> object = new ArrayList<>();
+	public List<Particles>particles= new ArrayList<>();
 	private boolean right = false, left = false, jump = false,attack;
 	public void update() {
 		for (int i=0;i<object.size();i++) { object.get(i).tick(); }

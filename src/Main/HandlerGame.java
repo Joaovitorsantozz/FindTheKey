@@ -24,6 +24,8 @@ public class HandlerGame {
     public Parallax parallax;
     public ConsoleStyle con;
     public static ConsoleHandler ch;
+
+
     public HandlerGame() {
         spr = new SpriteSheet("/SpriteSheet.png");
         font = new FontStyle();
@@ -32,8 +34,8 @@ public class HandlerGame {
         clock = new Cronometer(40, 40, 0, 10);
         invent = new Inventory(60, 150, 1);
         parallax = new Parallax();
-        con=new ConsoleStyle(350,Game.H-60,Game.handler.object,null);
         ch=new ConsoleHandler();
+        con=new ConsoleStyle(350,Game.H-60);
     }
 
     public void tick() {
