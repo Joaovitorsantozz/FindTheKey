@@ -4,6 +4,9 @@ import GameObject.Camera;
 import Graphics.SpriteSheet;
 import Graphics.UI.Cronometer;
 import Graphics.UI.Inventory;
+import Main.console.ConsoleHandler;
+import Main.console.ConsoleStyle;
+import Main.console.Cursor;
 import Main.utils.FontStyle;
 import World.Level;
 import World.LevelSwitch;
@@ -19,7 +22,8 @@ public class HandlerGame {
     public Cronometer clock;
     public Inventory invent;
     public Parallax parallax;
-
+    public ConsoleStyle con;
+    public static ConsoleHandler ch;
     public HandlerGame() {
         spr = new SpriteSheet("/SpriteSheet.png");
         font = new FontStyle();
@@ -28,14 +32,24 @@ public class HandlerGame {
         clock = new Cronometer(40, 40, 0, 10);
         invent = new Inventory(60, 150, 1);
         parallax = new Parallax();
+        con=new ConsoleStyle(350,Game.H-60,Game.handler.object,null);
+        ch=new ConsoleHandler();
     }
 
     public void tick() {
         clock.tick();
         parallax.tick();
+        ch.UpdateButtons();
     }
 
     public void render(Graphics g) {
         parallax.render(g);
+    }
+    public void renderNotAffect(Graphics g){
+        Graphics2D g2=(Graphics2D)g;
+        clock.render(g);
+        invent.render(g2);
+        con.drawConsole(g);
+        ch.drawButtons(g);
     }
 }

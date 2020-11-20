@@ -24,6 +24,8 @@ public class Game extends Canvas implements Runnable {
         handler = new GameObjectHandler();
         handlergame = new HandlerGame();
         this.addKeyListener(new KeyInput(handler));
+        this.addMouseMotionListener(new MouseInput(handlergame.ch.cursor));
+        this.addMouseListener(new MouseInput(handlergame.ch.cursor));
         text=new Text(FontStyle.getFont(150,Font.BOLD),"Aoba",300,500);
         //
         start();
@@ -38,6 +40,9 @@ public class Game extends Canvas implements Runnable {
         Thread tick = new Thread(this, "TickThread");
         tick.start();
         new Thread(this::run2, "RenderThread").start();
+        Image cursorImage = Toolkit.getDefaultToolkit().getImage("/UI/Cursor.png");
+        Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImage, new Point( 0, 0), "" );
+        setCursor( blankCursor );
     }
 
     public void tick() {
@@ -79,10 +84,9 @@ public class Game extends Canvas implements Runnable {
             g.setColor(Color.white);
             g.drawString("FPS =" + Frames, 1000, 50);
             g.drawString("Updates =" + upd,1000,90);
-            handlergame.clock.render(g);
-            handlergame.invent.render(g2);
+            handlergame.renderNotAffect(g);
             ////////////////////////////////////////////
-            text.DrawText(g,new Color(37, 29, 220),"Gradient");
+           // text.DrawText(g,new Color(37, 29, 220),"AnimateString");
             g.dispose();
             bs.show();
         }

@@ -13,21 +13,23 @@ import java.util.Random;
 
 public class Particles extends GameObject {
     Color color;
-    public int life=50;
+    public int life;
     private double dx,dy;
     public BufferedImage particle;
+    public int alpha=250;
     boolean oval;
     double rotate;
-    public Particles(int x, int y,float velX,float velY,Color color,ID id,BufferedImage part) {
+    public Particles(int x, int y,float velX,float velY,int life,Color color,ID id,BufferedImage part) {
         super(x, y, id);
-        setWidth(16);
-        setHeight(16);
+        setWidth(8+new Random().nextInt(8));
+        setHeight(getWidth());
         dx=new Random().nextGaussian();
         dy=new Random().nextGaussian();
         this.color=color;
         this.velX=velX;
         this.velY=velY;
         this.particle=part;
+        this.life=life;
     }
 
     @Override
@@ -35,6 +37,7 @@ public class Particles extends GameObject {
         x+=velX*dx;
         y+=velY*dy;
         life--;
+        if(alpha>=0) alpha--;
         if(life<=0)Game.handler.particles.remove(this);
     }
 
@@ -53,7 +56,7 @@ public class Particles extends GameObject {
         g.drawImage(particle,getX(),getY(),getWidth(),getHeight(),null);
     }
     public void renderFormat(Graphics g){
-        g.setColor(new Color(color.getRed(),color.getGreen(),color.getBlue(),life*3));
+        g.setColor(new Color(color.getRed(),color.getGreen(),color.getBlue(),alpha));
         if (oval) g.fillOval(x, y, getWidth(), getHeight());
         else g.fillRect(x, y, getWidth(), getHeight());
     }

@@ -24,13 +24,13 @@ public class Level extends World {
 		setHeight(spr.getHeight());
 		for (int xx = 0; xx < getWidth(); xx++) {
 			for (int yy = 0; yy < getHeight(); yy++) {
-				int[] pixel = new int[getWidth() * getHeight()];
+				int[] p = new int[getWidth() * getHeight()];
 				int pa = spr.getRGB(xx, yy);
-				spr.getRGB(0, 0, getWidth(), getHeight(), pixel, 0, getWidth());
+				spr.getRGB(0, 0, getWidth(), getHeight(), p, 0, getWidth());
 				BitMap(xx, yy, pa);
 				if (pa == 0xFFFFFFFF) {
 					Game.handler.add(new Tile(xx * 32, yy * 32, ID.Block, TileType.PolStone));
-					if (pixel[xx + ((yy - 1) * getWidth())] != 0xFFFFFFFF) {
+					if (p[xx + ((yy - 1) * getWidth())] != 0xFFFFFFFF) {
 						Game.handler.add(new Tile(xx * 32, yy * 32 - 32, ID.Block, TileType.DownFloor));
 					}
 				}

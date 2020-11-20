@@ -20,6 +20,7 @@ public class Saw extends GameObject {
         an.setAnimation(anim);
         setWidth(32*3);
         setHeight(32*3);
+
     }
 
     @Override

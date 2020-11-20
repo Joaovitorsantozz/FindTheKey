@@ -6,6 +6,7 @@ import Entity.ID;
 import Entity.Key;
 import Entity.Player;
 import GameObject.LevelItens.Saw;
+import GameObject.LevelItens.Torch;
 import Main.Game;
 
 import java.awt.image.BufferedImage;
@@ -79,6 +80,7 @@ public  class World {
         if(pa==0xFF16100C)Game.handler.add(new Door(xx*32,yy*32-90,ID.Door));
         if(pa==0xFF404040)Game.handler.add(new Saw(xx*32-26,yy*32-64,ID.Depth));
         if(pa==0xFF1E0C00)Game.handler.add(new Box(xx*32,yy*32,ID.Block));
+        if(pa==0xFFFF6A00)Game.handler.add(new Torch(xx*32,yy*32,ID.Torch));
     }
 
 }

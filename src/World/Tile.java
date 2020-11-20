@@ -30,7 +30,7 @@ public class Tile extends GameObject {
 
 		if(getTileType()==TileType.UpLava){
 			if(new Random().nextInt(100)==1)new ParticleHandler().CreateParticlesImage(
-					5,getX(),getY(),0,0.8f,HandlerGame.spr.getSprite(64,16,16,16)
+					5,50,getX(),getY(),0,0.8f,HandlerGame.spr.getSprite(64,16,16,16)
 			);
 		}
 	}

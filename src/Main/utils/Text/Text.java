@@ -31,7 +31,8 @@ public class Text {
         switch (Effect) {
             case "Default" -> Default(g);
             case "Flash" -> fs.draw(g, text);
-            case "Gradient" -> gradientString.animateString(g,x,y);
+            case "Gradient" -> gradientString.paint(g,x,y);
+            case "AnimateString"->gradientString.animateString(g,x,y);
         }
     }
     public void Default(Graphics g){

@@ -1,32 +1,25 @@
 package Entity;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-import java.util.Random;
-import java.util.function.BiFunction;
-
-import EngineInterfaces.Animable;
 import Entity.particles.ParticleHandler;
 import GameObject.GameObject;
 import GameObject.GameObjectHandler;
 import Main.Game;
-import Main.HandlerGame;
 import Main.utils.Animator;
 import Main.utils.CustomColor;
 import Main.utils.LoadImage;
 import World.LevelSwitch;
 import World.Tile;
 import World.TileType;
-import GameObject.Camera;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
 public class Player extends GameObject {
     public GameObjectHandler hand;
-    private float speed = 7;
+    private float speed = 5f;
     public boolean isFalling, canJump,interact,hasKey;
     public static boolean canWallJump,wallJump;
-    private int maxFrames = 5, maxIndex = 8;
+    public int maxFrames = 2, maxIndex = 8;
     private BufferedImage sprP,
             anim[], idle[];
     private int count=120;
@@ -58,7 +51,7 @@ public class Player extends GameObject {
             count++;
             if(count>10) {
                 new ParticleHandler().CreateAmount(
-                        3,35,getX()-64,getY()+15,1.3f,1.3f,new Color
+                        3,50,35,getX()-64,getY()+15,1.3f,1.3f,new Color
                                 (CustomColor.yellow.getRed(),CustomColor.yellow.getGreen(),CustomColor.yellow.getBlue())
                 );
                 Key.spaw=false;

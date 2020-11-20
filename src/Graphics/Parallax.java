@@ -19,8 +19,8 @@ public class Parallax {
 	private int w,h;
 
 	public Parallax() {
-		w=HandlerGame.level.getWidth()*32;
-		h=HandlerGame.level.getHeight()*32;
+		w=Game.W*3;
+		h=Game.H+HandlerGame.level.getHeight()*12;
 	}
 
 	public void tick() {
