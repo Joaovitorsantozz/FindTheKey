@@ -30,18 +30,23 @@ public class HandlerGame {
         spr = new SpriteSheet("/SpriteSheet.png");
         font = new FontStyle();
         cam = new Camera(0, 0);
-        level = new Level("/Level/level" + LevelSwitch.LEVEL + ".png", -520);
-        clock = new Cronometer(40, 40, 0, 10);
+        //Quando coloca o levelswitch ele buga e vai 2x o primeiro level
+        level = new Level("/Level/level1.png", -520);
+        clock = new Cronometer(40, 40, 0, 40);
         invent = new Inventory(60, 150, 1);
         parallax = new Parallax();
-        ch=new ConsoleHandler();
         con=new ConsoleStyle(350,Game.H-60);
+        ch=new ConsoleHandler();
     }
 
     public void tick() {
         clock.tick();
         parallax.tick();
-        ch.UpdateButtons();
+        try {
+            ch.UpdateButtons();
+        } catch (NoSuchMethodException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     public void render(Graphics g) {

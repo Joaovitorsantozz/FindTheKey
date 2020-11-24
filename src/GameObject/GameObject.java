@@ -11,7 +11,7 @@ public abstract class GameObject {
 	protected int x, y,dir;
 	protected float velX = 0, velY = 0;
 	protected ID id;
-	protected int depth;
+	private int depth;
 	private int width, height;
 	public GameObject(int x, int y, ID id) {
 		this.x = x;
@@ -27,10 +27,7 @@ public abstract class GameObject {
 	public abstract Rectangle getRightP();
 	public abstract Rectangle getLeftP();
 	public abstract Rectangle getToP();
-	
-	public static Comparator<GameObject> nodeSorter = Comparator.comparingInt(n0 -> n0.depth);
-
-
+	protected static Comparator<GameObject> nodeSorter = Comparator.comparingInt(n0 -> n0.depth);
 	public double calculateDistance(int x1, int y1, int x2, int y2) {
 		return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 	}

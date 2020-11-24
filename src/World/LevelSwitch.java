@@ -5,7 +5,7 @@ import Main.Game;
 import Main.HandlerGame;
 
 public class LevelSwitch {
-    public static int LEVEL = 4;
+    public static int LEVEL = 1;
     public static boolean next, rest;
     public int sec, m;
 
@@ -52,7 +52,7 @@ public class LevelSwitch {
         switch (LEVEL) {
             case 1 -> {
                 m = 0;
-                sec = 10;
+                sec = 40;
             }
             case 2, 3 -> {
                 m = 0;

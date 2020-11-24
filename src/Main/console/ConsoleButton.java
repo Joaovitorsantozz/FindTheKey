@@ -1,5 +1,7 @@
 package Main.console;
 
+import Entity.Player;
+import GameObject.GameObject;
 import Main.Game;
 import Main.utils.CustomColor;
 import Main.utils.FontStyle;
@@ -7,6 +9,7 @@ import Main.utils.Text.Text;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.Field;
 
 public class ConsoleButton {
     private int width, height, x, y;
@@ -14,8 +17,10 @@ public class ConsoleButton {
     private boolean onShape;
     public String txt;
     public ButtonsID ids;
-
-    public ConsoleButton(int x, int y, int w, int h, BufferedImage icon, String text, ButtonsID i) {
+    public Field field;
+    public FieldValues fieldValues=new FieldValues();
+    public GameObject cls;
+    public ConsoleButton(int x, int y, int w, int h, BufferedImage icon, String text, ButtonsID i, Field f, GameObject clas) {
         this.x = x;
         this.y = y;
         if (icon != null) {
@@ -30,9 +35,11 @@ public class ConsoleButton {
         if (text != null) txt = text;
         else txt = "";
         ids = i;
+        field=f;
+        cls=clas;
     }
 
-    public void checkCollision(Cursor cursor) {
+    public void checkCollision(Cursor cursor)throws NoSuchMethodException , IllegalAccessException  {
         if (ids == ButtonsID.Default) {
             if (cursor.getBound().intersects(getBound())) {
                 if (cursor.Click) {
@@ -54,13 +61,21 @@ public class ConsoleButton {
         } else if (ids == ButtonsID.More) {
             if (cursor.click2) {
                 if (cursor.getBound().intersects(getBound())) {
-                    Game.handlergame.con.more = true;
+                    if(field.getType().getName().equals("boolean"))fieldValues.setTrue(field,cls);
+                    else if(!field.getType().getName().equals("string")){
+                        fieldValues.increase=true;
+                        fieldValues.Increment(field,cls);
+                    }
                 }
             }
         } else if (ids == ButtonsID.Less) {
             if (cursor.click2) {
                 if (cursor.getBound().intersects(getBound())) {
-                    Game.handlergame.con.less = true;
+                    if(field.getType().getName().equals("boolean"))fieldValues.setFalse(field,cls);
+                    else if(!field.getType().getName().equals("string")){
+                        fieldValues.decrease=true;
+                        fieldValues.Decrease(field,cls);
+                    }
                 }
             }
         }
@@ -71,7 +86,6 @@ public class ConsoleButton {
         else ButtonRect(g);
         Graphics2D g2 = (Graphics2D) g;
         g.setColor(Color.blue);
-        g2.draw(getBound());
     }
 
     public void ButtonIcon(Graphics g) {
@@ -84,18 +98,31 @@ public class ConsoleButton {
         new Text(null, txt, x + 3, y + 13).DrawText(g, Color.blue, "Default");
     }
 
-    public void ButtonMore(Graphics g) {
-
-
-    }
-
-    public void ButtonLess(Graphics g) {
-        g.setColor(Color.white);
-        g.fillRect(x + 50, y, width, height);
-        new Text(null, "-", x + 53, y + 13).DrawText(g, Color.blue, "Default");
-    }
-
     public Rectangle getBound() {
         return new Rectangle(x, y, width, height);
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public ButtonsID getIds() {
+        return ids;
+    }
+
+    public void setIds(ButtonsID ids) {
+        this.ids = ids;
     }
 }

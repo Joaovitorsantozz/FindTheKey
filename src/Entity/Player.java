@@ -19,7 +19,7 @@ public class Player extends GameObject {
     public float speed = 5f;
     public boolean isFalling, canJump,interact,hasKey;
     public static boolean canWallJump,wallJump;
-    public int maxFrames = 2, maxIndex = 8;
+    public final int maxFrames = 2, maxIndex = 8;
     private BufferedImage sprP,
             anim[], idle[];
     private int count=120;
@@ -107,11 +107,11 @@ public class Player extends GameObject {
                 }
                 if (getRightP().intersects(e.getP())) {
                     x = getX() - e.getWidth() + 25;
-                    if(e instanceof Tile && ((Tile) e).getTileType()== TileType.PolStone)canWallJump=true;
+                    canWallJump= e instanceof Tile && ((Tile) e).getTileType() == TileType.PolStone;
                 }
                 if (getLeftP().intersects(e.getP())) {
                     x = e.getX() + (getWidth() / 2) - 10;
-                    if (e instanceof Tile && ((Tile) e).getTileType() == TileType.PolStone) canWallJump = true;
+                    canWallJump = e instanceof Tile && ((Tile) e).getTileType() == TileType.PolStone;
                 }
             }else if(e.getId()==ID.Depth){
                 if(getP().intersects(e.getP())){
