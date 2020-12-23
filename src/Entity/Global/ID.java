@@ -1,4 +1,4 @@
-package Entity;
+package Entity.Global;
 
 import Main.HandlerGame;
 
@@ -9,11 +9,15 @@ public enum ID {
 	Torch(),
 	Player(),
 	Block(),
+	BackBlock(),FakeBlock(),
 	Depth(),
 	Key(),
 	Door(),
 	Particle(),
-	SmalParticle();
+	SmalParticle(),
+	Shooter(),
+	StartPoint(),FinalPoint(),
+	Chain();
 
 
 	public BufferedImage SetImage(BufferedImage spr) {

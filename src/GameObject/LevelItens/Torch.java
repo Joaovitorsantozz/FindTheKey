@@ -1,6 +1,6 @@
 package GameObject.LevelItens;
 
-import Entity.ID;
+import Entity.Global.ID;
 import Entity.particles.ParticleHandler;
 import GameObject.GameObject;
 import Main.utils.Animator;

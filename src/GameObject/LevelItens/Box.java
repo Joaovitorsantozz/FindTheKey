@@ -1,13 +1,12 @@
 package GameObject.LevelItens;
 
-import Entity.ID;
+import Entity.Global.ID;
 import Entity.Player;
 import GameObject.GameObject;
 import Main.Game;
 import Main.HandlerGame;
 
-import World.LevelSwitch;
-import World.Tile;
+import World.tiles.Tile;
 
 
 import java.awt.*;
@@ -67,7 +66,7 @@ public class Box extends GameObject {
                 if (getLeftP().intersects(e.getP()))
                     x = e.getX() + getWidth();
                 if(getToP().intersects(e.getP())){
-                    y=e.getY()+getWidth();
+                    y=e.getY()+getHeight()/2;
                     velY=0;
                 }
             }if(e.getId()==ID.Depth){

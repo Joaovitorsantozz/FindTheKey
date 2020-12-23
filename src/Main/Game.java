@@ -1,6 +1,6 @@
 package Main;
 
-import Entity.ID;
+import Entity.Global.ID;
 import GameObject.GameObjectHandler;
 import Main.utils.FontStyle;
 import Main.utils.Text.Text;
@@ -17,16 +17,17 @@ public class Game extends Canvas implements Runnable {
     public int Frames, upd;
     public static final int W = 1280, H = 730;
     public static HandlerGame handlergame;
-    public Text text;
+    public static Text text;
+    BufferStrategy bs;
     public Game() {
         new Windows(W, H, "Engine", this);
         // Instancias
         handler = new GameObjectHandler();
         handlergame = new HandlerGame();
         this.addKeyListener(new KeyInput(handler));
-        this.addMouseMotionListener(new MouseInput(handlergame.ch.cursor));
-        this.addMouseListener(new MouseInput(handlergame.ch.cursor));
-        text=new Text(FontStyle.getFont(150,Font.BOLD),"Aoba",300,500);
+        this.addMouseMotionListener(new MouseInput(HandlerGame.ch.cursor));
+        this.addMouseListener(new MouseInput(HandlerGame.ch.cursor));
+        text = new Text(FontStyle.getFont(150, Font.BOLD), "Hasnt Focus!", 300, 400);
         //
         start();
     }
@@ -41,16 +42,17 @@ public class Game extends Canvas implements Runnable {
         tick.start();
         new Thread(this::run2, "RenderThread").start();
         Image cursorImage = Toolkit.getDefaultToolkit().getImage("/UI/Cursor.png");
-        Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImage, new Point( 0, 0), "" );
-        setCursor( blankCursor );
+        Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImage, new Point(0, 0), "");
+        setCursor(blankCursor);
     }
 
     public void tick() {
-        if (Thread.currentThread().getName().equals("TickThread")) {
+        if (Thread.currentThread().getName().equals("TickThread")&&hasFocus()) {
             handler.update();
             UpdateCam();
             new LevelSwitch().upd();
             handlergame.tick();
+
         }
     }
 
@@ -64,7 +66,7 @@ public class Game extends Canvas implements Runnable {
 
     public void render() {
         if (Thread.currentThread().getName().equals("RenderThread")) {
-            BufferStrategy bs = this.getBufferStrategy();
+             bs = this.getBufferStrategy();
             if (bs == null) {
                 this.createBufferStrategy(3);
                 return;
@@ -75,21 +77,27 @@ public class Game extends Canvas implements Runnable {
             Graphics2D g2 = (Graphics2D) g;
             g.setFont(FontStyle.getFont(40, 20));
             /////////////////////////////////
-            g2.translate(-handlergame.cam.getX(), -handlergame.cam.getY());
-            handlergame.render(g);
-            handler.render(g2);//GO
-            g2.translate(handlergame.cam.getX(), handlergame.cam.getY());
-            /////////////////////////////////
-            //Things that will be not affect by cam
-            g.setColor(Color.white);
-            g.drawString("FPS =" + Frames, 1000, 50);
-            g.drawString("Updates =" + upd,1000,90);
-            handlergame.renderNotAffect(g);
+            finalRender(g, g2);
+            if (!hasFocus()) {
+                g.setColor(new Color(0, 0, 0, 100));
+                g.fillRect(0, 0, W, H);
+                text.DrawText(g,Color.white,"Default");
+            }
             ////////////////////////////////////////////
-           // text.DrawText(g,new Color(37, 29, 220),"AnimateString");
             g.dispose();
             bs.show();
         }
+    }
+    public void finalRender(Graphics g, Graphics2D g2) {
+        g2.translate(-handlergame.cam.getX(), -handlergame.cam.getY());
+        handlergame.render(g);
+        handler.render(g2);//GO
+        g2.translate(handlergame.cam.getX(), handlergame.cam.getY());
+        //Things that will be not affect by cam
+        g.setColor(Color.white);
+        g.drawString("FPS =" + Frames, 1000, 50);
+        g.drawString("Updates =" + upd, 1000, 90);
+        handlergame.renderNotAffect(g);
     }
 
     @Override
@@ -102,26 +110,23 @@ public class Game extends Canvas implements Runnable {
         int ticks = 0;
         long lastTimer1 = System.currentTimeMillis();
         while (isRunning) {
+            boolean ticked = false;
             long now = System.nanoTime();
             unprocessed += (now - lastTime) / nsPerTick;
             lastTime = now;
-
             while (unprocessed >= 1) {
                 ticks++;
                 tick();
+                ticked = true;
                 unprocessed -= 1;
 
             }
 
-            try {
-                Thread.sleep(3);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+
+            if (ticked) {
+                frames++;
+                render();
             }
-
-            frames++;
-            render();
-
             if (System.currentTimeMillis() - lastTimer1 > 1000) {
                 lastTimer1 += 1000;
                 Frames = frames;

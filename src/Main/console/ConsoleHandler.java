@@ -25,6 +25,9 @@ public class ConsoleHandler {
         for(int i=0;i<buttons.size();i++){buttons.get(i).ButtonDraw(g);}
         cursor.draw(g);
     }
+    public void clear(){
+        buttons.clear();
+    }
     public void add(ConsoleButton bt){
         buttons.add(bt);
     }

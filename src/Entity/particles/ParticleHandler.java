@@ -1,6 +1,6 @@
 package Entity.particles;
 
-import Entity.ID;
+import Entity.Global.ID;
 import Main.Game;
 
 import java.awt.*;

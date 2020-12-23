@@ -52,7 +52,7 @@ public class LevelSwitch {
         switch (LEVEL) {
             case 1 -> {
                 m = 0;
-                sec = 40;
+                sec = 15;
             }
             case 2, 3 -> {
                 m = 0;

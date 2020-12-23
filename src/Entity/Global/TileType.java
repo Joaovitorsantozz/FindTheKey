@@ -1,16 +1,18 @@
-package World;
+package Entity.Global;
 
+import Entity.Global.Depth;
 import Main.HandlerGame;
+import World.tiles.Tile;
 
 import java.awt.image.BufferedImage;
 
 public enum TileType {
     UpFloor(), UpSolid(),
-    DownFloor(), DownFlor(),
+    DownFloor(), DownFlor(),DownMusg(),
     RightFloor(), RightSolid(),
     LeftFloor(), LeftSolid(),
     Stone(),
-    Back(),
+    Back(),FalseBlock(),
     PolStone(),
     Lava(),
     UpLava();
@@ -34,6 +36,7 @@ public enum TileType {
                 break;
             case Back:
                 spr = HandlerGame.spr.getSprite(16, 0, 16, 16);
+                t.setDepth(Depth.LITTLE-1);
                 break;
             case PolStone:
                 spr = HandlerGame.spr.getSprite(0, 64, 16, 16);
@@ -48,6 +51,7 @@ public enum TileType {
                 spr = HandlerGame.spr.getSprite(0, 80, 16, 16);
                 break;
             case RightSolid:
+            case DownMusg:
                 spr = HandlerGame.spr.getSprite(0, 96, 16, 16);
                 break;
             case LeftSolid:

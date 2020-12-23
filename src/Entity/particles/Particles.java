@@ -1,6 +1,6 @@
 package Entity.particles;
 
-import Entity.ID;
+import Entity.Global.ID;
 import GameObject.GameObject;
 import Main.Game;
 

@@ -1,26 +1,26 @@
 package GameObject.LevelItens;
 
-import Entity.ID;
+import Entity.Global.ID;
 import Entity.Player;
 import GameObject.GameObject;
 import Main.Game;
 import Main.HandlerGame;
 import Main.utils.Animator;
 import Main.utils.LoadImage;
-import World.Level;
+import Main.utils.Text.FlashString;
 import World.LevelSwitch;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Door extends GameObject {
-    public BufferedImage spr;
-    public BufferedImage lock;
-    public BufferedImage atualDraw = null;
-    public BufferedImage[] open;
-    public BufferedImage openld;
+    private BufferedImage spr
+            ,lock
+            ,atualDraw
+            ,openld;
+    private BufferedImage[] open;
     public boolean showDraw, isOpen;
-    Animator an;
+    private Animator an;
     int maxFrames = 5, maxIndex = 9;
 
     public Door(int x, int y, ID id) {
@@ -32,7 +32,7 @@ public class Door extends GameObject {
         atualDraw = spr;
         setWidth(32 * 3);
         setHeight(41 * 3);
-        setDepth(9);
+        setDepth(19);
         an = new Animator(maxFrames, maxIndex);
     }
 
@@ -61,6 +61,7 @@ public class Door extends GameObject {
                             an.setAnimation(open);
                             isOpen = true;
                             ((Player) e).hasKey = false;
+                            HandlerGame.tran=true;
                         }
                     }
                 }
@@ -70,6 +71,11 @@ public class Door extends GameObject {
                 showDraw = false;
                 isOpen = false;
                 spr = openld.getSubimage(0, 45 * 3, 40, 45);
+            }
+            if(an.getIndex()==2){
+                Game.handlergame.trans.increase=true;
+                FlashString.restart=true;
+                FlashString.start=true;
             }
         }
     }

@@ -1,10 +1,12 @@
-package World;
+package World.tiles;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-import Entity.ID;
+import Entity.Global.Depth;
+import Entity.Global.ID;
+import Entity.Global.TileType;
 import Entity.particles.ParticleHandler;
 import GameObject.GameObject;
 import Main.HandlerGame;
@@ -18,7 +20,7 @@ public class Tile extends GameObject {
 		super(x, y, id);
 		// TODO Auto-generated constructor stub
 		t = tt;
-		setDepth(100);
+		setDepth(Depth.LITTLE);
 		setWidth(32);
 		setHeight(32);
 		spr=t.SetImage(spr,this);

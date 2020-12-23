@@ -1,10 +1,9 @@
 package Main.console;
 
-import Entity.Player;
 import GameObject.GameObject;
 import Main.Game;
-import Main.utils.CustomColor;
-import Main.utils.FontStyle;
+import Main.HandlerGame;
+import Main.console.fields.FieldValues;
 import Main.utils.Text.Text;
 
 import java.awt.*;
@@ -15,11 +14,11 @@ public class ConsoleButton {
     private int width, height, x, y;
     private BufferedImage icon;
     private boolean onShape;
-    public String txt;
-    public ButtonsID ids;
-    public Field field;
-    public FieldValues fieldValues=new FieldValues();
-    public GameObject cls;
+    private String txt;
+    private ButtonsID ids;
+    private Field field;
+    private FieldValues fieldValues=new FieldValues();
+    private GameObject cls;
     public ConsoleButton(int x, int y, int w, int h, BufferedImage icon, String text, ButtonsID i, Field f, GameObject clas) {
         this.x = x;
         this.y = y;
@@ -52,7 +51,7 @@ public class ConsoleButton {
                     if (cursor.click2) {
                         cursor.click2 = false;
                         //Hide
-                        x = Game.W - 350 + 260 - 100;
+                        x = Game.W - 350 + 260 - 40;
                         Game.handlergame.con.isHide = true;
                         Game.handlergame.con.isDragged = false;
                     }
@@ -76,6 +75,23 @@ public class ConsoleButton {
                         fieldValues.decrease=true;
                         fieldValues.Decrease(field,cls);
                     }
+                }
+            }
+        }else if(ids==ButtonsID.ClassVars){
+            if(cursor.click2) {
+                if(cursor.getBound().intersects(getBound())) {
+                    Game.handlergame.con.fieldValues.setObj(getclass());
+                    Game.handlergame.con.showvars=true;
+                    Game.handlergame.con.showops=false;
+                    Game.handlergame.con.removeButton(ButtonsID.ClassVars);
+                }
+            }
+        }else if(ids==ButtonsID.Exit){
+            if(cursor.click2){
+                if(cursor.getBound().intersects(getBound())){
+                    Game.handlergame.con.showvars=false;
+                    Game.handlergame.con.showops=true;
+                    Game.handlergame.con.fieldValues.setObj(null);
                 }
             }
         }
@@ -124,5 +140,8 @@ public class ConsoleButton {
 
     public void setIds(ButtonsID ids) {
         this.ids = ids;
+    }
+    public GameObject getclass(){
+        return this.cls;
     }
 }

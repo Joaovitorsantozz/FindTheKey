@@ -1,19 +1,23 @@
 package Main;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
+import java.util.Arrays;
 
-import Entity.ID;
+import Entity.Global.ID;
 import Entity.Player;
 import GameObject.GameObject;
 import GameObject.GameObjectHandler;
-import World.World;
 
-public class KeyInput extends KeyAdapter {
+public class KeyInput implements KeyListener, FocusListener {
 	GameObjectHandler handler;
-
+	public boolean[] press=new boolean[65536];
 	public KeyInput(GameObjectHandler hand) {
 		this.handler = hand;
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+
 	}
 
 	public void keyPressed(KeyEvent e) {
@@ -28,6 +32,7 @@ public class KeyInput extends KeyAdapter {
 			}
 			if(obj instanceof Player)if(b==KeyEvent.VK_E)((Player) obj).interact=true;
 		}
+		Arrays.fill(press, true);
 	}
 
 	public void keyReleased(KeyEvent e) {
@@ -41,5 +46,16 @@ public class KeyInput extends KeyAdapter {
 				if(obj instanceof Player)if(b==KeyEvent.VK_E)((Player) obj).interact=false;
 			}
 		}
+		Arrays.fill(press, false );
+	}
+
+	@Override
+	public void focusGained(FocusEvent e) {
+
+	}
+
+	@Override
+	public void focusLost(FocusEvent e) {
+		Arrays.fill(press, false);
 	}
 }

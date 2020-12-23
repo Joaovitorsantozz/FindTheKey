@@ -1,13 +1,14 @@
 package GameObject;
 
-import java.awt.Graphics;
-import java.awt.Rectangle;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Comparator;
 
-import Entity.ID;
+import Entity.Global.ID;
 
 
 public abstract class GameObject {
+	public boolean drawBounds;
 	protected int x, y,dir;
 	protected float velX = 0, velY = 0;
 	protected ID id;
@@ -28,6 +29,7 @@ public abstract class GameObject {
 	public abstract Rectangle getLeftP();
 	public abstract Rectangle getToP();
 	protected static Comparator<GameObject> nodeSorter = Comparator.comparingInt(n0 -> n0.depth);
+
 	public double calculateDistance(int x1, int y1, int x2, int y2) {
 		return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 	}
@@ -43,7 +45,16 @@ public abstract class GameObject {
 		//
 		return velX != 0;
 	}
-	
+	public void DrawBounds(Graphics2D g2){
+		g2.setColor(Color.white);
+		g2.draw(getP());
+		g2.draw(getLeftP());
+		g2.draw(getRightP());
+		g2.draw(getToP());
+	}
+	public void drawDefaultTex(Graphics g, BufferedImage sprite){
+		g.drawImage(sprite,getX(),getY(),getWidth(),getHeight(),null);
+	}
 	public int getWidth() {
 		return width;
 	}

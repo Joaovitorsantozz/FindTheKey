@@ -1,5 +1,7 @@
 package Entity;
 
+import Entity.Global.Depth;
+import Entity.Global.ID;
 import Entity.particles.ParticleHandler;
 import GameObject.GameObject;
 import GameObject.GameObjectHandler;
@@ -8,29 +10,29 @@ import Main.utils.Animator;
 import Main.utils.CustomColor;
 import Main.utils.LoadImage;
 import World.LevelSwitch;
-import World.Tile;
-import World.TileType;
+import World.tiles.FakeBlock;
+import World.tiles.Tile;
+import Entity.Global.TileType;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Player extends GameObject {
     private GameObjectHandler hand;
-    public float speed = 5f;
+    public float speed = 5f,jumpforce=15f;
     public boolean isFalling, canJump,interact,hasKey;
     public static boolean canWallJump,wallJump;
-    public final int maxFrames = 2, maxIndex = 8;
+    public final int maxFrames = 6, maxIndex = 8;
     private BufferedImage sprP,
             anim[], idle[];
     private int count=120;
     private Animator an;
-
     public Player(int x, int y, ID id, GameObjectHandler hand) {
         super(x, y, id);
         // TODO Auto-generated constructor stub
         this.hand = hand;
         this.dir = 1;
-        setDepth(20);
+        setDepth(Depth.MEDIUM);
         setWidth(16 * 3);
         setHeight(32 * 3);
         sprP = new LoadImage("/PlayerSheet.png").getImage();
@@ -72,7 +74,7 @@ public class Player extends GameObject {
         }
         if (hand.isJump()) {
             if (canJump)
-                setVelY(-15);
+                setVelY(-jumpforce);
             canJump = false;
         }
         if (canWallJump) {
@@ -82,10 +84,10 @@ public class Player extends GameObject {
                     //Make the impact for back
                     if (dir == 1) setVelX(-20);
                     if (dir == -1) setVelX(20);
+                    canWallJump=false;
                 }
                 //------------------------\\
                 hand.setJump(false);
-                canWallJump = false;
             }
     }
 
@@ -117,6 +119,8 @@ public class Player extends GameObject {
                 if(getP().intersects(e.getP())){
                     LevelSwitch.rest=true;  
                 }
+            }else if(e instanceof FakeBlock){
+                if(getP().intersects(e.getP()))FakeBlock.fade=true;
             }
         }
     }
@@ -132,16 +136,9 @@ public class Player extends GameObject {
         if (getDir() == 1) g.drawImage(an.getAnimation(), getX(), getY(), 96, 96, null);
         else if (getDir() == -1) g.drawImage(an.getAnimation(), getX() + 68, getY(), -96, 96, null);
 
+        if(drawBounds)DrawBounds(g2);
     }
 
-
-    private void Drawbounds(Graphics2D g2) {
-        g2.setColor(Color.white);
-        g2.draw(getP());
-        g2.draw(getRightP());
-        g2.draw(getLeftP());
-        g2.draw(getToP());
-    }
 
     @Override
     public Rectangle getP() {
@@ -149,11 +146,11 @@ public class Player extends GameObject {
     }
 
     public Rectangle getRightP() {
-        return new Rectangle(getX() + (getWidth()) + 3, getY() + 5, 5, getHeight() - 10);
+        return new Rectangle(getX() + (getWidth()) + 3, getY() + 25, 5, getHeight() - 40);
     }
 
     public Rectangle getLeftP() {
-        return new Rectangle(getX() + 13, getY() + 5, 5, getHeight() - 10);
+        return new Rectangle(getX() + 13, getY() + 25, 5, getHeight() - 40);
     }
 
     public Rectangle getToP() {

@@ -1,17 +1,12 @@
 package Graphics.UI;
 
-import Entity.ID;
-import GameObject.GameObject;
-import Main.Game;
 import Main.utils.CustomColor;
 import Main.utils.FontStyle;
 import Main.utils.LoadImage;
-import World.Level;
 import World.LevelSwitch;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.sql.SQLOutput;
 
 public class Cronometer {
     public BufferedImage clock;

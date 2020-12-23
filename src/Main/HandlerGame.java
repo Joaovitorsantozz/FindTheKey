@@ -24,15 +24,15 @@ public class HandlerGame {
     public Parallax parallax;
     public ConsoleStyle con;
     public static ConsoleHandler ch;
-
-
+    public static boolean tran;
+    public Transition trans=new Transition();
     public HandlerGame() {
         spr = new SpriteSheet("/SpriteSheet.png");
         font = new FontStyle();
         cam = new Camera(0, 0);
         //Quando coloca o levelswitch ele buga e vai 2x o primeiro level
-        level = new Level("/Level/level1.png", -520);
-        clock = new Cronometer(40, 40, 0, 40);
+        level = new Level("/Level/level1.png", -420);
+        clock = new Cronometer(40, 40, 0, 15);
         invent = new Inventory(60, 150, 1);
         parallax = new Parallax();
         con=new ConsoleStyle(350,Game.H-60);
@@ -47,6 +47,7 @@ public class HandlerGame {
         } catch (NoSuchMethodException | IllegalAccessException e) {
             e.printStackTrace();
         }
+
     }
 
     public void render(Graphics g) {
@@ -58,5 +59,6 @@ public class HandlerGame {
         invent.render(g2);
         con.drawConsole(g);
         ch.drawButtons(g);
+        trans.drawTransition(g2);
     }
 }

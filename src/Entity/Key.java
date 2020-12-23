@@ -1,5 +1,7 @@
 package Entity;
 
+import Entity.Global.Depth;
+import Entity.Global.ID;
 import Entity.particles.ParticleHandler;
 import GameObject.GameObject;
 import Main.Game;
@@ -13,7 +15,7 @@ public class Key extends GameObject {
     public static boolean spaw;
     public Key(int x, int y, ID id) {
         super(x, y, id);
-        setDepth(11);
+        setDepth(Depth.MEDIUM);
         setWidth(48);
         setHeight(48);
         spr= id.SetImage(spr);
